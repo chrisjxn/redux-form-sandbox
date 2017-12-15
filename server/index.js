@@ -63,10 +63,11 @@ passport.deserializeUser(function (id, done) {
 
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/private',
+    successRedirect: 'http://localhost:3000/login-success',
     failureRedirect: '/auth'
 }))
 app.get('/auth/me', (req, res) => {
+    console.log(req.user);
     if (req.user) {
         return res.status(200).send(req.user);
     } else {
@@ -77,6 +78,8 @@ app.get('/auth/logout', (req, res) => {
     req.logOut();
     res.redirect(`https://${process.env.AUTH_DOMAIN}/v2/logout?returnTo=http%3A%2F%2Flocalhost:3000`);
 })
+
+app.get('/api/vehicles', controller.getAllVehicles);
 
 const PORT = 3020;
 app.listen(PORT, console.log(`Server listening on port ${PORT}`));

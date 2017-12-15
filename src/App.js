@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Login from './components/login/Login';
-import Private from './components/private/Private';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Header from './components/header/Header';
+import Home from './components/home/Home';
+import LoginSuccess from './components/loginSuccess/LoginSuccess';
+import UserCollection from './components/userCollection/UserCollection';
+import UserProfile from './components/userProfile/UserProfile';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Route path='/' component={Login} exact />
-          <Route path='/private' component={Private} />
+          <header>
+            <Header />
+          </header>
+          <div>
+            <Switch>
+              <Route path='/' component={Home} exact />
+              <Route path='/collections/:userId' component={UserCollection} />
+              <Route path='/profile/:userId' component={UserProfile} />
+              <Route path='/login-success' component={LoginSuccess} />
+            </Switch>
+          </div>
         </div>
       </BrowserRouter>
     );

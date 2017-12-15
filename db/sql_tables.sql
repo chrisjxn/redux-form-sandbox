@@ -8,3 +8,12 @@ CREATE TABLE users (
     img_url TEXT, 
     auth_id TEXT
 );
+
+CREATE TABLE vehicles (
+    id SERIAL PRIMARY KEY, 
+    user_id INT REFERENCES users(id), 
+    type VARCHAR(20), 
+    color VARCHAR(20), 
+    description VARCHAR(100), 
+    photo_url TEXT
+);
